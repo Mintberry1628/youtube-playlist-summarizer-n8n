@@ -101,8 +101,8 @@ This n8n workflow:
 
 ## Screenshots
 
-![Workflow Overview](screenshots/overview.png)
-
+![Workflow Overview](img/first_workflow.png)
+![Workflow Overview](img/second_workflow.png)
 *The full n8n workflow for summarizing YouTube playlists.*
 
 
