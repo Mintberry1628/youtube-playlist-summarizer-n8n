@@ -28,11 +28,18 @@ This project demonstrates how to automatically summarize new videos from a YouTu
 
 ```
 .
-├── n8n_workflow.json         # n8n workflow export file
-├── screenshots/              # Example screenshots
-│   ├── overview.png
-│   └── nodes_example.png
+├── .gitignore
+├── LICENSE
 ├── README.md
+├── yt_transcript.py
+├── img/
+│   ├── first_workflow.png
+│   └── second_workflow.png
+├── logs/
+│   └── yt_processed_ids.txt
+├── n8n/
+│   ├── YouTube_Playlist_Summarizer.json
+│   └── YouTube_Transcript_Handler.json
 ```
 
 ---
@@ -86,27 +93,12 @@ This n8n workflow:
 6. **(Optional) Logging & Error Handling:** The workflow can be expanded for better error management.
 
 ---
-<<<<<<< HEAD
-
-## Screenshots
-
-![Workflow Overview](screenshots/overview.png)
-
-*The full n8n workflow for summarizing YouTube playlists.*
-
-
-
----
-=======
->>>>>>> 25fd6e0 (Update README.md)
 
 ## Screenshots
 
 ![Workflow Overview](img/first_workflow.png)
 ![Workflow Overview](img/second_workflow.png)
 *The full n8n workflow for summarizing YouTube playlists.*
-
-
 
 ---
 
