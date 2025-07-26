@@ -99,6 +99,16 @@ This n8n workflow:
 =======
 >>>>>>> 25fd6e0 (Update README.md)
 
+## Screenshots
+
+![Workflow Overview](screenshots/overview.png)
+
+*The full n8n workflow for summarizing YouTube playlists.*
+
+
+
+---
+
 ## Lessons Learned
 
 - Not all YouTube videos offer transcripts—some videos (especially music or private uploads) have no transcript, which can interrupt the flow.
