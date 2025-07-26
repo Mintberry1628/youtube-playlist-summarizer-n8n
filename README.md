@@ -84,6 +84,7 @@ This n8n workflow:
 6. **(Optional) Logging & Error Handling:** The workflow can be expanded for better error management.
 
 ---
+<<<<<<< HEAD
 
 ## Screenshots
 
@@ -94,6 +95,8 @@ This n8n workflow:
 
 
 ---
+=======
+>>>>>>> 25fd6e0 (Update README.md)
 
 ## Lessons Learned
 
