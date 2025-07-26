@@ -17,6 +17,7 @@ This project demonstrates how to automatically summarize new videos from a YouTu
 - [Prerequisites](#prerequisites)
 - [Setup & Configuration](#setup--configuration)
 - [How it Works (Step by Step)](#how-it-works-step-by-step)
+- [Screenshots](#screenshots)
 - [Lessons Learned](#lessons-learned)
 - [Findings](#findings)
 - [Credits](#credits)
