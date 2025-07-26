@@ -3,44 +3,12 @@
   "nodes": [
     {
       "parameters": {
-        "chatId": "HIER TELEGRAM-CHAT-ID EINTRAGEN",
-        "text": "=Fehler in Workflow: {{$json[\"workflow\"][\"name\"]}}\nVideo-ID (falls vorhanden): {{$json[\"item\"][\"videoId\"]}}\nFehler: {{$json[\"error\"][\"message\"]}}",
-        "additionalFields": {}
-      },
-      "id": "af8f610c-c53b-446f-9e4d-5b9eeb21f4dc",
-      "name": "Versand Fehlernachricht",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.1,
-      "position": [
-        660,
-        480
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "HIER TELEGRAM API EINTRAGEN",
-          "name": "Telegram account"
-        }
-      }
-    },
-    {
-      "parameters": {},
-      "id": "ef1dedfa-13d7-4348-a6fa-10135e0b05f6",
-      "name": "Fehler Trigger",
-      "type": "n8n-nodes-base.errorTrigger",
-      "typeVersion": 1,
-      "position": [
-        440,
-        480
-      ]
-    },
-    {
-      "parameters": {
         "httpMethod": "POST",
         "path": "youtube-summary-receive",
         "options": {}
       },
       "id": "5e00b681-f3ac-4bfd-b8e5-661780059c11",
-      "name": "Info aus Workflow1",
+      "name": "Info from Workflow1",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1.1,
       "position": [
@@ -51,12 +19,12 @@
     },
     {
       "parameters": {
-        "chatId": "HIER TELEGRAM-CHAT-ID EINTRAGEN",
+        "chatId": "YOUR TELEGRAM CHAT ID",
         "text": "={{ $json.message.content }}",
         "additionalFields": {}
       },
       "id": "d1c0f7a6-3464-493c-a574-927f91288909",
-      "name": "Versand Zusammenfassung",
+      "name": "Send Summary",
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.1,
       "position": [
@@ -65,7 +33,39 @@
       ],
       "credentials": {
         "telegramApi": {
-          "id": "HIER TELEGRAM-API EINTRAGEN",
+          "id": "YOUR TELEGRAM API",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "ef1dedfa-13d7-4348-a6fa-10135e0b05f6",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        440,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR TELEGRAM CHAT ID",
+        "text": "=An error occurred in workflow: {{$json[\"workflow\"][\"name\"]}}\nVideo ID (if available): {{$json[\"item\"][\"videoId\"]}}\nError message: {{$json[\"error\"][\"message\"]}}",
+        "additionalFields": {}
+      },
+      "id": "af8f610c-c53b-446f-9e4d-5b9eeb21f4dc",
+      "name": "Send Error Notification",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        660,
+        480
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR TELEGRAM API",
           "name": "Telegram account"
         }
       }
@@ -88,7 +88,7 @@
         "options": {}
       },
       "id": "a0bf54a6-f12f-41bb-8d4c-8f974620e132",
-      "name": "Zusammenfassen des Videos",
+      "name": "Summarize Video",
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.2,
       "position": [
@@ -97,7 +97,7 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "HIER OPENAI-API EINTRAGEN",
+          "id": "YOUR OPENAI API",
           "name": "OpenAi account"
         }
       }
@@ -105,33 +105,33 @@
   ],
   "pinData": {},
   "connections": {
-    "Fehler Trigger": {
+    "Info from Workflow1": {
       "main": [
         [
           {
-            "node": "Versand Fehlernachricht",
+            "node": "Summarize Video",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Info aus Workflow1": {
+    "Error Trigger": {
       "main": [
         [
           {
-            "node": "Zusammenfassen des Videos",
+            "node": "Send Error Notification",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Zusammenfassen des Videos": {
+    "Summarize Video": {
       "main": [
         [
           {
-            "node": "Versand Zusammenfassung",
+            "node": "Send Summary",
             "type": "main",
             "index": 0
           }
@@ -143,7 +143,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "80ed48e7-1345-47a9-bf52-312b51b13b14",
+  "versionId": "61231b0e-def9-43f3-8ffe-aa369324e0ff",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "aeb458b20e713d5817b125787f16434360a4842a7df99fb7178135d5cd572fee"
