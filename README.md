@@ -33,6 +33,7 @@ This project demonstrates how to automatically summarize new videos from a YouTu
 │   └── nodes_example.png
 ├── README.md
 ```
+
 ---
 
 ## Use Case
