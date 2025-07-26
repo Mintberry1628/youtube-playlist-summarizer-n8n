@@ -1,81 +1,125 @@
-# YouTube Playlist Summarizer (n8n + OpenAI)
+# YouTube Playlist Summarizer (n8n Workflow)
 
-Automatisiert: Holt neue Videos aus einer YouTube-Playlist, erstellt Transkripte, fasst sie per OpenAI GPT zusammen und sendet das Ergebnis direkt per Telegram.
-
-## Features & Technik
-
-- Läuft auf Raspberry Pi in Docker mit n8n
-- Holt neue Videos automatisch (YouTube Data API)
-- Erstellt Transkript (youtube-transcript-api, Python)
-- Zusammenfassung per OpenAI GPT (API)
-- Telegram-Benachrichtigung bei Erfolg und Fehlern
-- Log-Datei aller erfolgreichen Zusammenfassungen
-
-**Technischer Überblick:**  
-- Zwei separate n8n-Workflows: einer überwacht die Playlist, einer nimmt Webhook-Anfragen entgegen  
-- Python-Skript holt das Transkript via Video-ID  
-- Verarbeitete Video-IDs werden in `yt_processed_ids.txt` gespeichert
+![License](https://img.shields.io/github/license/Mintberry1628/youtube-playlist-summarizer-n8n)
+![Languages](https://img.shields.io/github/languages/top/Mintberry1628/youtube-playlist-summarizer-n8n)
+![Platform](https://img.shields.io/badge/platform-RaspberryPi-green)
+![Last Commit](https://img.shields.io/github/last-commit/Mintberry1628/youtube-playlist-summarizer-n8n)
 
 
-## Getting Started
-
-### Voraussetzungen
-
-- Raspberry Pi mit Docker & Docker Compose
-- GitHub-Account (für Code-Download)
-- Eigener Telegram-Bot (per BotFather) & Chat-ID
-- OpenAI-API-Key (kostenpflichtig)
-- YouTube Data API-Key (Google Cloud Platform)
-
-## Installation (Kurzfassung)
-
-1. **Repo klonen:**
-   ```sh
-   git clone https://github.com/Mintberry1628/youtube-playlist-summarizer-n8n.git
-
-2.	Docker Compose konfigurieren und starten
-(Umgebung anpassen, API-Keys eintragen)
-
-3.	n8n Workflows importieren
-(JSON-Dateien liegen im n8n-Ordner)
-
-4.	Telegram-Bot und OpenAI integrieren
+This project demonstrates how to automatically summarize new videos from a YouTube playlist using n8n. Summaries are delivered via Telegram.
 
 
-## Beispiel-Workflows
+## Table of Contents
 
-<img width="1440" height="739" alt="image" src="https://github.com/user-attachments/assets/6d7bfaeb-54fd-45d0-a223-e42cdc1e684b" />
-<img width="1440" height="739" alt="image" src="https://github.com/user-attachments/assets/5664344c-13b8-493a-a72b-a7c92057fc66" />
+- [Folder Structure](#folder-structure)
+- [Use Case](#use-case)
+- [Workflow Overview](#workflow-overview)
+- [Prerequisites](#prerequisites)
+- [Setup & Configuration](#setup--configuration)
+- [How it Works (Step by Step)](#how-it-works-step-by-step)
+- [Lessons Learned](#lessons-learned)
+- [Findings](#findings)
+- [Credits](#credits)
 
+---
 
-## Ordnerstruktur
+## Folder Structure
 
 ```
-. 
-├── README.md 
-├── yt_transcript.py 
-├── yt_processed_ids.txt 
-├── n8n/ 
-└── logs/ 
+.
+├── n8n_workflow.json         # n8n workflow export file
+├── screenshots/              # Example screenshots
+│   ├── overview.png
+│   └── nodes_example.png
+├── README.md
 ```
+---
+
+## Use Case
+
+You want to receive regular, concise summaries of all new videos added to a YouTube playlist—without having to watch every video in full.
+
+---
+
+## Workflow Overview
+
+This n8n workflow:
+
+- Retrieves all new videos from a given YouTube playlist.
+- Downloads the transcript for each video (if available).
+- Uses AI (e.g., OpenAI) to summarize the content.
+- Sends the summary (including the video title) via Telegram.
+
+---
+
+## Prerequisites
+
+- A running [n8n](https://n8n.io/) instance (Docker, cloud, self-hosted, etc.)
+- A YouTube Data API key
+- An OpenAI API key (or alternative summarization service)
+- A Telegram bot token and chat ID
+
+---
+
+## Setup & Configuration
+
+1. **Clone or download this repository.**
+2. **Import the `n8n_workflow.json` file into your n8n instance.**
+3. **Set up credentials in n8n:**
+    - YouTube API Key
+    - OpenAI (or alternative) API Key
+    - Telegram Bot Token and Chat ID
+4. **Set your desired YouTube Playlist ID in the appropriate node.**
+5. *(Optional)* Configure a schedule trigger to automate execution.
+
+---
+
+## How it Works (Step by Step)
+
+1. **Trigger:** The workflow is started manually or by schedule.
+2. **YouTube Playlist Check:** The playlist is checked for new videos.
+3. **Transcript Retrieval:** For each new video, the transcript is downloaded (if available).
+4. **Summarization:** The transcript is sent to OpenAI (or another LLM) for summarization.
+5. **Telegram Notification:** The summary, including the video title, is sent as a Telegram message.
+6. **(Optional) Logging & Error Handling:** The workflow can be expanded for better error management.
+
+---
+
+## Screenshots
+
+![Workflow Overview](screenshots/overview.png)
+
+*The full n8n workflow for summarizing YouTube playlists.*
+
+
+
+---
 
 ## Lessons Learned
 
-- Erstes Mal: Raspberry Pi komplett eingerichtet und im Netzwerk erreichbar gemacht (SSH, VNC Viewer, Connect)
-- Mein erster produktiver Docker-Einsatz (Container-Management, Volumes, Updates)
-- Einstieg in n8n-Workflows und deren Export/Import, Error-Trigger
-- Umgang mit API-Keys und Secrets
-- Debugging von Fehlern rund um Dateirechte, Netzwerkzugriffe, u.v.m.
-- Workflow-Design: Wie prüft man am besten, ob ein Task schon erledigt ist (Datei vs. Datenbank)?
-- GitHub als Portfolio-Tool – und wie Doku & ReadMe den Unterschied machen
+- Not all YouTube videos offer transcripts—some videos (especially music or private uploads) have no transcript, which can interrupt the flow.
+- The YouTube API limits how many requests you can make in a given time window.
+- Handling API errors and timeouts is essential for robustness.
+- The quality of AI-generated summaries varies—long transcripts or multi-part content can lead to less precise summaries.
+- Telegram is fast and easy for notifications, but other integrations (Slack, Email, Notion, etc.) are possible.
 
-**Erkenntnis:**  
-Gerade durch viele kleine Fehler unterwegs (Rechte, Pfade, Umgebungen) habe ich gelernt, Probleme systematisch einzugrenzen.
+---
 
+## Findings
+
+- **n8n** is very flexible for automating such data pipelines and can be extended with many services.
+- **YouTube's transcript extraction** is not officially documented—sometimes transcripts are missing even when visible on YouTube.
+- **LLM Summarization** is a powerful tool but can be improved with prompt engineering or by splitting longer transcripts.
+- This workflow can serve as a base for other "summarize new content" automations (e.g., RSS feeds, Notion pages, articles, etc.).
+
+---
 
 ## Credits
 
-- [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api)
-- [n8n.io](https://n8n.io/)
-- [OpenAI API](https://openai.com/api/)
-- [Telegram Bot API](https://core.telegram.org/bots/api)
+- Workflow developed and documented by [Mintberry1628](https://github.com/Mintberry1628).
+- Powered by [n8n](https://n8n.io/), [OpenAI](https://openai.com), and the [YouTube Data API](https://developers.google.com/youtube/v3).
+- Inspired by the open automation and productivity community.
+
+---
+
+**For questions or suggestions, feel free to open an issue or contact me via GitHub.**
