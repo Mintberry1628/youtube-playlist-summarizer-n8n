@@ -31,7 +31,7 @@ This project demonstrates how to automatically summarize new videos from a YouTu
 ├── .gitignore
 ├── LICENSE
 ├── README.md
-├── yt_transcript.py
+├── yt_transcript.py         # Script to fetch YouTube transcripts (optional, see Notes)
 ├── img/
 │   ├── first_workflow.png
 │   └── second_workflow.png
@@ -73,7 +73,7 @@ This n8n workflow:
 ## Setup & Configuration
 
 1. **Clone or download this repository.**
-2. **Import the `n8n_workflow.json` file into your n8n instance.**
+2. **Import the `n8n/YouTube_Playlist_Summarizer.json` and `n8n/YouTube_Transcript_Handler.json` file into your n8n instance.**
 3. **Set up credentials in n8n:**
     - YouTube API Key
     - OpenAI (or alternative) API Key
@@ -109,6 +109,7 @@ This n8n workflow:
 - Handling API errors and timeouts is essential for robustness.
 - The quality of AI-generated summaries varies—long transcripts or multi-part content can lead to less precise summaries.
 - Telegram is fast and easy for notifications, but other integrations (Slack, Email, Notion, etc.) are possible.
+- Thorough error handling and fallback strategies (e.g., handling missing transcripts) are recommended for production use.
 
 ---
 
