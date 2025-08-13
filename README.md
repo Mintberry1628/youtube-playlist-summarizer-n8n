@@ -1,13 +1,17 @@
 # YouTube Playlist Summarizer (n8n Workflow)
 
+![Tool](https://img.shields.io/badge/tool-n8n-blue)
+![Platform](https://img.shields.io/badge/platform-Docker-green)
+![Platform](https://img.shields.io/badge/platform-RaspberryPi-green)
+![API](https://img.shields.io/badge/API-OpenAI-orange)
 ![License](https://img.shields.io/github/license/Mintberry1628/youtube-playlist-summarizer-n8n)
 ![Languages](https://img.shields.io/github/languages/top/Mintberry1628/youtube-playlist-summarizer-n8n)
-![Platform](https://img.shields.io/badge/platform-RaspberryPi-green)
 ![Last Commit](https://img.shields.io/github/last-commit/Mintberry1628/youtube-playlist-summarizer-n8n)
 
 
-This project demonstrates how to automatically summarize new videos from a YouTube playlist using n8n. Summaries are delivered via Telegram.
+This project demonstrates how automation can save time and ensure up-to-date information without manual effort.
 
+**Tech Stack:** n8n, Docker, OpenAI API, Telegram API, YouTube Data API
 
 ## Table of Contents
 
@@ -18,8 +22,7 @@ This project demonstrates how to automatically summarize new videos from a YouTu
 - [Setup & Configuration](#setup--configuration)
 - [How it Works (Step by Step)](#how-it-works-step-by-step)
 - [Screenshots](#screenshots)
-- [Lessons Learned](#lessons-learned)
-- [Findings](#findings)
+- [Key Learnings & Next Steps](#key-learnings--next-steps)
 - [Credits](#credits)
 
 ---
@@ -102,23 +105,12 @@ This n8n workflow:
 
 ---
 
-## Lessons Learned
+## Key Learnings & Next Steps
 
-- Not all YouTube videos offer transcripts—some videos (especially music or private uploads) have no transcript, which can interrupt the flow.
-- The YouTube API limits how many requests you can make in a given time window.
-- Handling API errors and timeouts is essential for robustness.
-- The quality of AI-generated summaries varies—long transcripts or multi-part content can lead to less precise summaries.
-- Telegram is fast and easy for notifications, but other integrations (Slack, Email, Notion, etc.) are possible.
-- Thorough error handling and fallback strategies (e.g., handling missing transcripts) are recommended for production use.
-
----
-
-## Findings
-
-- **n8n** is very flexible for automating such data pipelines and can be extended with many services.
-- **YouTube's transcript extraction** is not officially documented—sometimes transcripts are missing even when visible on YouTube.
-- **LLM Summarization** is a powerful tool but can be improved with prompt engineering or by splitting longer transcripts.
-- This workflow can serve as a base for other "summarize new content" automations (e.g., RSS feeds, Notion pages, articles, etc.).
+- Flexible orchestration with n8n; Telegram works well as a fast and reliable delivery channel.
+- Limitations: missing transcripts, YouTube API rate limits, and LLM output quality for very long texts.
+- Fixes implemented: transcript availability check, retry/backoff logic, chunking and prompt tuning.
+- Next steps: add a fallback for missing transcripts, support multi-channel output, and implement basic workflow monitoring.
 
 ---
 
