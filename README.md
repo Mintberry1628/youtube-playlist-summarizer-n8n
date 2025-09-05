@@ -50,8 +50,6 @@ pip install -U pip youtube-transcript-api requests
 # run the summarizer on a schedule or manually to test
 ~~~
 
-> **Note on `requests`:** The helper script posts the transcript to your n8n webhook. If you prefer, you can replace `requests` with Python’s built-in `urllib.request` and remove `requests` from your environment.
-
 ---
 
 ## Folder Structure
