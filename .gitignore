@@ -1,1 +1,65 @@
+############################################################
+# Project: youtube-playlist-summarizer-n8n — Git ignore rules
+############################################################
+
+# --- OS / Editor noise ---
 .DS_Store
+Thumbs.db
+ehthumbs.db
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
+*.log
+.vscode/
+.idea/
+*.code-workspace
+
+# --- Python build / cache ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+.build/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# --- Virtual envs ---
+.venv/
+venv/
+env/
+ENV/
+.conda/
+*.conda
+
+# --- Runtime state / logs ---
+logs/
+*.log
+
+# --- Secrets / tokens / local config (NEVER commit) ---
+.env
+.env.*
+config.json
+creds.json
+*secrets*.json
+*secret*.json
+
+# --- n8n (keep sanitized exports only) ---
+# DO NOT commit credentials/state from n8n
+# n8n/.cache/
+# n8n/credentials.json
+
+# --- Images / docs (keep PNGs you add intentionally) ---
+# (no generic ignore here; keep /img screenshots in repo)
+
+############################################################
+# End of file
+############################################################
