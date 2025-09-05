@@ -1,4 +1,3 @@
-```markdown
 # YouTube Playlist Summarizer (n8n Workflow)
 
 ![Tool](https://img.shields.io/badge/tool-n8n-blue)
@@ -206,4 +205,3 @@ All code was produced under my direction and verified against real inputs before
 ## License
 
 This project is released under the **MIT License**. See [LICENSE](LICENSE) for details.
-```
